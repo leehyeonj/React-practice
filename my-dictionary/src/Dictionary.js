@@ -14,14 +14,16 @@ const Dictionary = (props) => {
    
     return (
         <div>
-            <WordBox>
-                <Title>단어</Title>
-                <p>{my_words}</p>
-                <Title>설명</Title>
-                <p>{my_desc}</p>
-                <Title>예시</Title>
-                <p>{my_ex}</p>
-            </WordBox>
+             {
+                my_words.map((words, index) => {
+                    return (
+                    <WordBox key={index}>
+                        
+                        {words}
+                    
+                    </WordBox>);
+                })
+            }
         </div>
     );
 }

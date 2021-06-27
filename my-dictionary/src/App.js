@@ -7,9 +7,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      words :["히히"],
-      desc: ["히히를 변형한 단어"],
-      ex: ["저 친구가 초콜릿을 줬어"]
+      words :["히히", "반가워"],
+      desc: ["히히를 변형한 단어","반갑다는 뜻"],
+      ex: ["저 친구가 초콜릿을 줬어","얼마나 반갑냐?"]
     };
     // // ref는 이렇게 선언합니다! 
     // this.text = React.createRef();
