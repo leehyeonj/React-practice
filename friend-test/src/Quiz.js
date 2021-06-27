@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import img from "./scc_img.jpg";
 import TinderCard from "react-tinder-card";
+import SwipeItem from "./SwipeItem";
 
 //
 const Quiz = (props) => {
@@ -25,7 +26,6 @@ const Quiz = (props) => {
       </p>
       {props.list.map((l, idx) => {
         if (num === idx) {
-            // props의 list에 있는 question의 값들을 순서대로 불러온다.
           return <Question key={idx}>{l.question}</Question>;
         }
       })}
@@ -37,18 +37,19 @@ const Quiz = (props) => {
 
       {props.list.map((l, idx) => {
         if (idx === num) {
-          return (
-            <DragItem key={idx}>
-              <TinderCard
-                onSwipe={onSwipe}
-                onCardLeftScreen={onSwipe}
-                onCardRightScreen={onSwipe}
-                preventSwipe={["up", "down"]}
-              >
-                <img src={img} />
-              </TinderCard>
-            </DragItem>
-          );
+          return <SwipeItem key={idx} onSwipe={onSwipe} />;
+          // return (
+          //   <DragItem key={idx}>
+          //     <TinderCard
+          //       onSwipe={onSwipe}
+          //       onCardLeftScreen={onSwipe}
+          //       onCardRightScreen={onSwipe}
+          //       preventSwipe={["up", "down"]}
+          //     >
+          //       <img src={img} />
+          //     </TinderCard>
+          //   </DragItem>
+          // );
         }
       })}
     </QuizContainer>
