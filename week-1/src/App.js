@@ -1,11 +1,12 @@
 import React from "react";
 
 import { withRouter } from "react-router";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import BucketList from "./BucketList";
 import styled from "styled-components";
 import Detail from "./Detail";
+import NotFound from "./NotFound";
 
 class App extends React.Component {
   constructor(props) {
@@ -34,13 +35,19 @@ class App extends React.Component {
         <Container>
           <Title>내 버킷리스트</Title>
           <Line />
-        
+          <Switch>
           <Route
             path="/"
             exact
             render={(props) => <BucketList list={this.state.list} history={this.props.history}/>}
           />
           <Route path="/detail" component={Detail}/>
+          <Route render={(props) => (
+                <NotFound
+                  history={this.props.history}
+                />
+              )}/>
+          </Switch>
         </Container>
       
         <Input>
