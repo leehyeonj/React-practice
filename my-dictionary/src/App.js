@@ -1,15 +1,19 @@
 import React from "react";
 import logo from "./logo.svg";
+import { withRouter } from "react-router";
+import { Route, Link } from "react-router-dom";
 import Dictionary from "./Dictionary";
+import AddWord from "./AddWord";
 import styled from "styled-components";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      words :["히히", "반가워"],
-      desc: ["히히를 변형한 단어","반갑다는 뜻"],
-      ex: ["저 친구가 초콜릿을 줬어","얼마나 반갑냐?"]
+      words : [
+        {word: "ㅎ1ㅎ1", desc: "히히를 변형한 단어", ex:"저 친구가 초콜릿을 줬어."},
+        {word: "데이식스", desc: "i just", ex:"예아!"},
+      ],
     };
     // // ref는 이렇게 선언합니다! 
     // this.text = React.createRef();
@@ -27,9 +31,15 @@ class App extends React.Component {
         <Container>
           <Title>My dictionary</Title>
           <Line />
-           <Dictionary words={this.state.words}
-                desc = {this.state.desc}
-                ex={this.state.ex} />
+          <Route
+            path="/"
+            exact
+            render={(props) => <Dictionary words={this.state.words} history={this.props.history}/>}
+          />
+          <Route  path="/addword" component={AddWord}/>
+
+        
+          <Link to="/addword">단어추가하기</Link>
         </Container>
 
       
