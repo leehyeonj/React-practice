@@ -1,0 +1,44 @@
+div{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    padding: 16px;
+    box-Sizing: border-box;
+}
+
+.outter{
+    display: flex;
+    align-items: center;
+    justify-Content: center;
+    flex-Direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    padding: 0px 5vw;
+    box-Sizing: border-box;
+    max-Width: 400px;
+}
+img{
+    width: 80%;
+     margin: 16px;
+}
+span{
+    background-Color: #fef5d4;
+    padding: 5px 10px;
+    border-Radius: 30px;
+}
+.textbox{
+     padding: 10px;
+    margin: 24px 0px;
+    border: 1px solid #dadafc;
+    border-Radius:30px;
+    width: 100%;
+}
+
+.btn{
+     padding: 8px 24px;
+    background-Color: #dadafc;
+    border-Radius: 30px;
+    border: #dadafc;
+}
