@@ -1,12 +1,11 @@
-// 리액트 패키지를 불러옵니다.
 import React from 'react'; 
 import styled from "styled-components";
-
-
+ 
+ 
 const BucketList = (props) => {
     // 부모의 state에 있는 list 를 가져온다.
     const my_lists = props.list;
-
+ 
     console.log(props);
     // 컴포넌트가 뿌려줄 ui 요소(리엑트 엘리먼트라고 불러요.)를 반환해줍니다.
     return (
@@ -21,8 +20,8 @@ const BucketList = (props) => {
         </ListStyle>
     );
 }
-
-
+ 
+ 
 const ListStyle = styled.div`
         display: flex;
         flex-direction: column;
@@ -30,7 +29,7 @@ const ListStyle = styled.div`
         overflow-x: hidden;
         overflow-y: auto;
 `;
-
+ 
 const ItemStyle = styled.div`
         padding: 16px;
         margin: 8px;
