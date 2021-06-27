@@ -31,6 +31,7 @@ class App extends React.Component {
         <Container>
           <Title>My dictionary</Title>
           <Line />
+          {/* 처음부터 딕셔너리에 words를 넘겨줘야 dictionary에서 쓸 수 있음 */}
           <Route
             path="/"
             exact
