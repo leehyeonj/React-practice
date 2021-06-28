@@ -40,7 +40,7 @@ const Message = (props) => {
           height: "100vh",
           width: "100vw",
           overflow: "hidden",
-          padding: "0px 10vw",
+          padding: "0px 5vw",
           boxSizing: "border-box",
           maxWidth: "400px",
           margin: "0px auto",
