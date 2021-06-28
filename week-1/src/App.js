@@ -8,25 +8,47 @@ import styled from "styled-components";
 import Detail from "./Detail";
 import NotFound from "./NotFound";
 
+import {connect} from "react-redux";
+import { loadBucket, createBucket } from "./redux/modules/bucket";
+
+// 리덕스에 있는 상태값을 props형태로 app에 넣어줌
+const mapStateToProps = (state)=>{
+  return {bucket_list : state.bucket.list};
+
+}
+
+// 액션 생성을 감시하는 것 액션 반환 .
+const mapDispatchToProps = (dispatch)=>{
+  return{
+    load: ()=>{
+      dispatch(loadBucket());
+    },
+
+    create: (bucket) =>{
+      dispatch(createBucket(bucket));
+    }
+  };
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      list: ["영화관 가기", "매일 책읽기", "수영 배우기"],
+      
     };
 
     this.text = React.createRef();
   }
 
   componentDidMount() {
-    console.log(this.text);
+    console.log(this.props);
   }
 
   addBucketList = () => {
-    let list = this.state.list;
     const new_item = this.text.current.value;
-    this.setState({ list: [...list, new_item] });
+    this.props.create(new_item);
+   
   };
 
   render() {
@@ -39,9 +61,14 @@ class App extends React.Component {
           <Route
             path="/"
             exact
-            render={(props) => <BucketList list={this.state.list} history={this.props.history}/>}
+            render={(props) => 
+            <BucketList 
+            bucket_list={this.props.bucket_list} 
+            history={this.props.history}/>}
           />
-          <Route path="/detail" component={Detail}/>
+          {/* detail 페이지에서 버킷리스트를 보여주기 위해 
+          몇 번째인지 알아야하기 때문에 index값을 가져온다 */}
+          <Route path="/detail:index" component={Detail}/>
           <Route render={(props) => (
                 <NotFound
                   history={this.props.history}
@@ -89,4 +116,5 @@ const Line = styled.hr`
   border: 1px dotted #ddd;
 `;
 // withRouter 적용
-export default withRouter(App);
+// connect로 컴포넌트에 연결
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));
