@@ -107,6 +107,8 @@ const Container = styled.div`
 const Title = styled.h1`
   color: slateblue;
   text-align: center;
+  font-family: 'DungGeunMo';
+  font-size: 2.3rem;
 `;
 
 const Line = styled.hr`

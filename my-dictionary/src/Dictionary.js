@@ -23,18 +23,18 @@ const Dictionary = (props) => {
                         }}
                         >
                         <Words>
-                            <div>
+                            <Line>
                                 <Title>단어</Title>
                                 <Word_word>{list.word}</Word_word>
-                            </div>
-                            <div>
+                            </Line>
+                            <Line>
                                  <Title>설명</Title>
                                 <span>{list.desc}</span>
-                            </div>
-                            <div>
+                            </Line>
+                            <Line>
                                  <Title>예시</Title>
                                  <Word_ex>{list.ex}</Word_ex>
-                            </div>
+                            </Line>
                         </Words>
                     </WordBox>
                 );
@@ -50,10 +50,11 @@ const Dictionary = (props) => {
 const WordBox = styled.div`
     margin: 0 auto;
     width: 90%;
-    height: 200px;
+    height: 100%;
     background-color: rgb(245, 243, 237);
     border-radius: 20px;
     box-shadow: 0 1px 5px rgb(198, 197, 197);
+   
 `;
 
 const Title = styled.span`
@@ -64,16 +65,21 @@ const Title = styled.span`
     margin-bottom: 5px;
 `;
 
+const Line = styled.div`
+    margin-bottom: 13px;
+`;
 
 const Words = styled.div`
     font-family: 'DungGeunMo';
     width: 90%;
-    height: 80%;
+    height: 100%;
     margin: 20px;
-    padding-top: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
+    text-align: left;
     
 `;
 const Word_word = styled.span`
@@ -82,9 +88,9 @@ const Word_word = styled.span`
 `;
 
 const Word_ex = styled.span`
-    font-size: 1.1rem;
     display: block;
-    color: darkgray;
+    color: #819FF7;
+    // color:slateblue;
 `;
 
 
