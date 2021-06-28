@@ -31,6 +31,9 @@ const Detail = (props) => {
                 dispatch(deleteWord(words_index));
                 props.history.push("/");
             }}>삭제하기</button>
+             <button onClick={()=>{
+                props.history.goBack();
+              }}>뒤로가기</button>
          </div>
     
    

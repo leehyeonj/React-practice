@@ -9,6 +9,9 @@ import styled from "styled-components";
 import plusbtn from "./button.png"
 import {connect} from "react-redux";
 import { getWord, addWord } from "./redux/modules/words";
+import './App.css';
+import './style.css';
+
 
 // 리덕스에 있는 상태값을 props형태로 app에 넣어줌
 const mapStateToProps = (state)=>{
@@ -51,24 +54,30 @@ class App extends React.Component {
       <Div className="App">
         <Container>
           <Title>My dictionary</Title>
-          <Line />
-          {/* 처음부터 딕셔너리에 words를 넘겨줘야 dictionary에서 쓸 수 있음 */}
-       
-          <Switch>
           
-          <Route
-            path="/"
-            exact
-            render={(props) => 
-            <Dictionary 
-            words_list={this.props.words_list} 
-            history={this.props.history}/>}
-          />
-          <Route  path="/addword" component={AddWord}/>
-          {/* <Link to="/addword">단어추가하기</Link> */}
-          <Route path="/detail/:index" component={Detail}/>
-          </Switch>
-          <img src = {plusbtn}/>
+          {/* 처음부터 딕셔너리에 words를 넘겨줘야 dictionary에서 쓸 수 있음 */}
+          <div className="wordsBox">
+              <Switch>
+              <Route
+                path="/"
+                exact
+                render={(props) => 
+                <Dictionary 
+                words_list={this.props.words_list} 
+                history={this.props.history}/>}
+              />
+              <Route  path="/addword" component={AddWord}/>
+              {/* <Link to="/addword">단어추가하기</Link> */}
+              <Route path="/detail/:index" component={Detail}/>
+              </Switch>
+          </div>
+          <PlusBtn>
+            <img className = "plusBtn" src = {plusbtn}
+                onClick={()=>{
+                  this.props.history.push("/addword");
+                }}/>
+          </PlusBtn>
+         
         </Container>
               
       
@@ -87,7 +96,7 @@ const Div = styled.div`
 
 const Container = styled.div`
   max-width: 350px;
-  min-height: 80vh;
+  height: 80vh;
   background-color: #fff;
   margin:50px auto;
   border-radius: 20px;
@@ -105,4 +114,8 @@ const Line = styled.hr`
   border: 1px dotted #ddd;
 `;
 
+const PlusBtn = styled.div`
+  text-align : center;
+  
+`;
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));

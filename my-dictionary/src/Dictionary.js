@@ -22,21 +22,26 @@ const Dictionary = (props) => {
                             props.history.push("/detail/"+index);
                         }}
                         >
-                        <Title>단어</Title>
-                        <div>{list.word}</div>
-                        <Title>설명</Title>
-                        <div>{list.desc}</div>
-                        <Title>예시</Title>
-                        <div>{list.ex}</div>
+                        <Words>
+                            <div>
+                                <Title>단어</Title>
+                                <Word_word>{list.word}</Word_word>
+                            </div>
+                            <div>
+                                 <Title>설명</Title>
+                                <span>{list.desc}</span>
+                            </div>
+                            <div>
+                                 <Title>예시</Title>
+                                 <Word_ex>{list.ex}</Word_ex>
+                            </div>
+                        </Words>
                     </WordBox>
                 );
             })
         }
          <Route  path="/addword" component={AddWord}/>
-        <button onClick={()=>{
-              props.history.push("/addword");
-            }}>단어 추가하기</button>
-            {/* <Link to="/addword">단어추가하기</Link> */}
+        
         </div>
     );
 }
@@ -44,15 +49,43 @@ const Dictionary = (props) => {
 
 const WordBox = styled.div`
     margin: 0 auto;
-    width: 80%;
+    width: 90%;
     height: 200px;
-    background-color: #eee4f5;
+    background-color: rgb(245, 243, 237);
+    border-radius: 20px;
+    box-shadow: 0 1px 5px rgb(198, 197, 197);
 `;
 
-const Title = styled.p`
+const Title = styled.span`
     font-size: 0.7rem;
     text-decoration: underline;
-
+    display: block;
+    margin-top:2px;
+    margin-bottom: 5px;
 `;
+
+
+const Words = styled.div`
+    font-family: 'DungGeunMo';
+    width: 90%;
+    height: 80%;
+    margin: 20px;
+    padding-top: 5px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+`;
+const Word_word = styled.span`
+    font-size: 1.5rem;
+    display: block;
+`;
+
+const Word_ex = styled.span`
+    font-size: 1.1rem;
+    display: block;
+    color: darkgray;
+`;
+
 
 export default withRouter(Dictionary);
