@@ -1,47 +1,46 @@
 // 리액트 패키지를 불러옵니다.
 import React from 'react'; 
 import styled from "styled-components";
-
+// redux hook을 불러옵니다.
+import {useDispatch, useSelector} from 'react-redux';
+import { Route, Link, Switch } from "react-router-dom";
+import AddWord from "./AddWord";
+import { withRouter } from "react-router";
 
 const Dictionary = (props) => {
-    const my_words = props.words;
+    const my_words = useSelector(state => state.words.list);
+    console.log(my_words);
 
     return (
-        // <WordBox>
-        //     <Title>단어</Title>
-        //    {
-        //     my_words.map((l,idx)=>{
-        //        return <div key={idx}>{l.word}</div>
-        //    })}
-        //    <Title>설명</Title>
-        //    {
-        //     my_words.map((l,idx)=>{
-        //        return <div key={idx}>{l.desc}</div>
-        //    })}
-        //     <Title>예시</Title>
-        //    {
-        //     my_words.map((l,idx)=>{
-        //        return <div key={idx}>{l.ex}</div>
-        //    })}
-        // </WordBox>
         <div>
         {
-            my_words.map((l,idx)=>{
+            my_words.map((list,index)=>{
                 return(
-                    <WordBox>
+                    <WordBox
+                        key ={index}
+                        onClick={()=>{
+                            props.history.push("/detail/"+index);
+                        }}
+                        >
                         <Title>단어</Title>
-                        <div key={idx}>{l.word}</div>
+                        <div>{list.word}</div>
                         <Title>설명</Title>
-                        <div key={idx}>{l.desc}</div>
+                        <div>{list.desc}</div>
                         <Title>예시</Title>
-                        <div key={idx}>{l.ex}</div>
+                        <div>{list.ex}</div>
                     </WordBox>
                 );
             })
         }
+         <Route  path="/addword" component={AddWord}/>
+        <button onClick={()=>{
+              props.history.push("/addword");
+            }}>단어 추가하기</button>
+            {/* <Link to="/addword">단어추가하기</Link> */}
         </div>
     );
 }
+
 
 const WordBox = styled.div`
     margin: 0 auto;
@@ -56,4 +55,4 @@ const Title = styled.p`
 
 `;
 
-export default Dictionary;
+export default withRouter(Dictionary);
