@@ -8,7 +8,9 @@ import Detail from "./Detail";
 import styled from "styled-components";
 import plusbtn from "./button.png"
 import {connect} from "react-redux";
-import { getWord, addWord } from "./redux/modules/words";
+import { loadDic} from "./redux/modules/words";
+
+import {firestore} from "./firebase";
 import './App.css';
 import './style.css';
 
@@ -23,12 +25,10 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch)=>{
   return{
     load: ()=>{
-      dispatch(getWord());
+      dispatch(loadDic());
     },
 
-    create: (words) =>{
-      dispatch(addWord(words));
-    }
+    
   };
 }
 
@@ -44,7 +44,7 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    
+    this.props.load();
   }
  
   

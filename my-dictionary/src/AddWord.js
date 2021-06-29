@@ -1,11 +1,11 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {addWord} from "./redux/modules/words";
+import { useDispatch} from "react-redux";
+import {addDic} from "./redux/modules/words";
 import styled from "styled-components";
 
 const AddWord = (props) => {
     const dispatch = useDispatch();
-    const my_words = useSelector(state => state.words.list);
+    // const my_words = useSelector(state => state.words.list);
     const input_word = React.useRef(null);
     const input_desc = React.useRef(null);
     const input_ex = React.useRef(null);
@@ -36,7 +36,7 @@ const AddWord = (props) => {
                     desc: input_desc.current.value,
                     ex: input_ex.current.value,
                   };
-                  dispatch(addWord(my_add_word));
+                  dispatch(addDic(my_add_word));
                   props.history.goBack();
               }
                 

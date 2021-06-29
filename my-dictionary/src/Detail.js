@@ -4,7 +4,7 @@ import styled from "styled-components";
 // redux hook을 불러옵니다.
 import { useDispatch, useSelector } from "react-redux";
 // 내가 만든 액션 생성 함수를 불러옵니다.
-import {deleteWord} from "./redux/modules/words";
+import {deleteDic} from "./redux/modules/words";
 
 const Detail = (props) => {
     const dispatch = useDispatch();
@@ -38,8 +38,9 @@ const Detail = (props) => {
             </WordBox>
             <Btn>
                 <Button onClick={() => {
-                    dispatch(deleteWord(words_index));
-                    props.history.push("/");
+                    dispatch(deleteDic(words_index));
+                    props.history.goBack();
+                    // window.location.replace("/")
                 }}>삭제하기</Button>
                 <Button onClick={()=>{
                     props.history.goBack();
