@@ -1,37 +1,41 @@
-import React from "react";
-import Nemo from "./Nemo";
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+import React from 'react';
+import './App.css';
+import styled, {keyframes} from "styled-components";
 
-    this.state = {
-      
-    };
-    this.div = React.createRef();
-  }
-
-  hoverEvent = (e)=>{
-    e.target.style.background = "#eee";
-  }
-  // DOM이 다 만들어지고 나서 이벤트리스너 등록
-  componentDidMount() {
-    this.div.current.addEventListener("mouseover", this.hoverEvent);
-  }
-
-  // DOM이 없어지면 구독 해제
-  componentWillUnmount(){
-    this.div.current.removeEventListener("mouseover", this.hoverEvent);
-  }
-
-  render() {
+function App() {
   
-
-    return (
-      <div className="App" ref={this.div}>
-        <Nemo/>
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+     <Box></Box>
+    </div>
+  );
 }
+const boxFade = keyframes`
+  0% {
+    opacity: 1;
+    top: 20px;
+
+  }
+  50% {
+    opacity: 0;
+    top: 400px;
+  }
+  100% {
+    opacity: 1;
+    top: 20px;
+  }
+`;
+const Box = styled.div`
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background: green;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  animation: ${boxFade} 2s 1s infinite linear alternate;
+`;
+
+
 
 export default App;

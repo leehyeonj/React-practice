@@ -32,7 +32,7 @@ const Detail = (props) => {
                     </div>
                     <div>
                     <Title>예시</Title>
-                    <Word_ex>{word_list[words_index].desc}</Word_ex>
+                    <Word_ex>{word_list[words_index].ex}</Word_ex>
                     </div>
                 </Words>
             </WordBox>
