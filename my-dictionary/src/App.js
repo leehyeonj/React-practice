@@ -96,7 +96,7 @@ const Div = styled.div`
 
 const Container = styled.div`
   max-width: 350px;
-  height: 80vh;
+  height: 90vh;
   background-color: #fff;
   margin:50px auto;
   border-radius: 20px;
@@ -118,6 +118,5 @@ const Line = styled.hr`
 
 const PlusBtn = styled.div`
   text-align : center;
-  
 `;
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));

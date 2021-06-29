@@ -4,7 +4,7 @@
     overflow: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    height: 55vh;
+    height: 60vh;
     margin: 25px;
     padding-bottom: 10px;
     box-shadow:inset 0 1px 5px rgb(198, 197, 197);
@@ -12,4 +12,9 @@
 }
 .wordsBox::-webkit-scrollbar{ 
     display:none; 
+}
+.plusBtn{
+    margin:0 auto;
+    display: flex;
+    vertical-align: middle;
 }
