@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="view.js"></script>
+  </head>
+  <body>
+
+
+
+    <div>
+     <div class="color"></div>
+     <div class="color"></div>
+    </div>
+    
+    <script>
+            var color = document.getElementsByClassName("color");
+
+            function handleClick(event) {
+
+            if (event.target.classList[1] === "clicked") {
+                event.target.classList.remove("clicked");
+            } else {
+                for (var i = 0; i < color.length; i++) {
+                color[i].classList.remove("clicked");
+                }
+
+                event.target.classList.add("clicked");
+            }
+            }
+
+            function init() {
+            for (var i = 0; i < color.length; i++) {
+                color[i].addEventListener("click", handleClick);
+            }
+            }
+
+            init();
+    </script>
+  </body>
+</html>

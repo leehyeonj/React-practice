@@ -9,7 +9,7 @@ import { withRouter } from "react-router";
 
 const Dictionary = (props) => {
     const my_words = useSelector(state => state.words.list);
-    console.log(my_words);
+    console.log('my_words',my_words);
 
     return (
         <div>
@@ -21,6 +21,8 @@ const Dictionary = (props) => {
                         onClick={()=>{
                             props.history.push("/detail/"+index);
                         }}
+                        color = {list.color}
+                    
                         >
                         <Words>
                             <Line>
@@ -51,7 +53,7 @@ const WordBox = styled.div`
     margin: 0 auto;
     width: 90%;
     height: 100%;
-    background-color: rgb(245, 243, 237);
+    background-color: ${(props)=> props.color};
     border-radius: 20px;
     box-shadow: 0 1px 5px rgb(198, 197, 197);
    

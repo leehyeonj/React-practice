@@ -10,6 +10,7 @@ const LOADED = "words/LOADED";
 const initialState = {
     list : [ ],
     is_loaded: false,
+    
 }
 
 // Action creator
@@ -46,7 +47,7 @@ export const loadDic = ()=>{
 
 export const addDic = (words) =>{
     return function (dispatch){
-        let words_data = {word:words.word, desc:words.desc, ex:words.ex, password:words.password};
+        let words_data = {word:words.word, desc:words.desc, ex:words.ex, password:words.password , color:words.color};
 
         dispatch(isLoaded(false));
         word_db.add(words_data).then(docRef =>{

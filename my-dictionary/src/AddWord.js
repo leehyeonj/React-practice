@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch} from "react-redux";
 import {addDic} from "./redux/modules/words";
 import styled from "styled-components";
-
+import './style.css';
 const AddWord = (props) => {
     const dispatch = useDispatch();
     // const my_words = useSelector(state => state.words.list);
@@ -10,7 +10,7 @@ const AddWord = (props) => {
     const input_desc = React.useRef(null);
     const input_ex = React.useRef(null);
     const input_password = React.useRef(null);
-
+    let boxcolor = 'rgb(245, 243, 237)';
 
     return (
         <Container>
@@ -34,6 +34,12 @@ const AddWord = (props) => {
                 <Input_title>비번</Input_title>
                 <Input_word ref={input_password} type="password"/>
             </div>
+      
+            <ColorSet>
+              <div className="colorbtn" onClick ={()=>{boxcolor='#FBE081' }} ></div>
+              <div className="colorbtn" onClick ={()=>{boxcolor='#F6E1E1' }} ></div>
+              <div className="colorbtn" onClick ={()=>{boxcolor='#D5E5F6' }} ></div>
+            </ColorSet>
           </Body>
          <Btn>
               <Button onClick={() => {
@@ -42,6 +48,7 @@ const AddWord = (props) => {
                     desc: input_desc.current.value,
                     ex: input_ex.current.value,
                     password : input_password.current.value,
+                    color: boxcolor,
                   };
                   dispatch(addDic(my_add_word));
                   props.history.goBack();
@@ -108,4 +115,40 @@ const Button= styled.button`
         background-color: #5858FA;
     }
 `;
+
+const ColorSet = styled.div`
+    height: 30px;
+    margin-top: 10px;
+    display:flex;
+    & : first-child{
+      height: 20px;
+      width: 20px;
+      border-radius: 15px;
+      background-color: #FBE081;
+      box-shadow: 0 1px 5px rgb(198, 197, 197);
+      margin-right: 5px;
+    }
+    & : nth-child(2){
+      height: 20px;
+      width: 20px;
+      border-radius: 15px;
+      background-color: #F6E1E1;
+      box-shadow: 0 1px 5px rgb(198, 197, 197);
+      margin-right: 5px;
+    }
+    & : nth-child(3){
+      height: 20px;
+      width: 20px;
+      border-radius: 15px;
+      background-color: #D5E5F6;
+      box-shadow: 0 1px 5px rgb(198, 197, 197);
+      margin-right: 5px;
+    }
+    // & div:hover{
+    //   height: 30px;
+    //   width: 30px;
+    //   border-radius: 15px;
+    // }
+`;
+
 export default AddWord;

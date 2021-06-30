@@ -20,7 +20,8 @@ const Detail = (props) => {
       
     <div>
 
-            <WordBox>
+            <WordBox
+                color={word_list[words_index].color}>
                 <Words>
                     <div>
                         <Title>단어</Title>
@@ -56,7 +57,7 @@ const WordBox = styled.div`
     margin: 0 auto;
     width: 90%;
     height: 100%;
-    background-color: rgb(245, 243, 237);
+    background-color: ${(props)=> props.color};
     border-radius: 20px;
     box-shadow: 0 1px 5px rgb(198, 197, 197);
    
