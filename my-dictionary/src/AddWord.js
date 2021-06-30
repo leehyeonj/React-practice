@@ -12,6 +12,11 @@ const AddWord = (props) => {
     const input_password = React.useRef(null);
     let boxcolor = 'rgb(245, 243, 237)';
 
+
+    const [yellow, setYellow] = useState(false);
+    const [pink, setPink] = useState(false);
+    const [blue, setBlue] = useState(false);
+
     return (
         <Container>
           {/* <Title>
@@ -36,11 +41,32 @@ const AddWord = (props) => {
             </div>
       
             <ColorSet>
-              <div onClick ={()=>{boxcolor='#FBE081'}} ></div>
+              <YellowCircle 
+               size={yellow}
+               onClick ={()=>{
+                boxcolor='#FBE081'
+                setYellow(!yellow);
+                pink && setPink(!pink);
+                blue && setBlue(!blue);
+                }} ></YellowCircle>
 
-              <div onClick ={()=>{ boxcolor='#F6E1E1' }} ></div>
+              <PinkCircle 
+              size={pink}
+              onClick ={()=>{ 
+                boxcolor='#F6E1E1'
+                setPink(!pink);
+                yellow && setYellow(!yellow);
+                blue && setBlue(!blue);
+                }} ></PinkCircle>
 
-              <div onClick ={()=>{ boxcolor='#D5E5F6'}} ></div>
+              <BlueCircle 
+              size={blue}
+              onClick ={()=>{ 
+                boxcolor='#D5E5F6'
+                setBlue(!blue);
+                yellow && setYellow(!yellow);
+                pink && setPink(!pink);
+                }} ></BlueCircle>
             </ColorSet>
           </Body>
          <Btn>
@@ -122,35 +148,34 @@ const ColorSet = styled.div`
     height: 30px;
     margin-top: 10px;
     display:flex;
-    & : first-child{
-      height:20px;
-      width: 20px;
-      border-radius: 15px;
-      background-color: #FBE081;
-      box-shadow: 0 1px 5px rgb(198, 197, 197);
-      margin-right: 5px;
-    }
-    & : nth-child(2){
-      height: 20px;
-      width: 20px;
-      border-radius: 15px;
-      background-color: #F6E1E1;
-      box-shadow: 0 1px 5px rgb(198, 197, 197);
-      margin-right: 5px;
-    }
-    & : nth-child(3){
-      height:20px;
-      width: 20px;
-      border-radius: 15px;
-      background-color: #D5E5F6;
-      box-shadow: 0 1px 5px rgb(198, 197, 197);
-      margin-right: 5px;
-    }
-    // & div:hover{
-    //   height: 30px;
-    //   width: 30px;
-    //   border-radius: 15px;
-    // }
 `;
+const YellowCircle = styled.div`
+  height:${(props) => (props.size ? '25px' : '20px')};
+  width: ${(props) => (props.size ? '25px' : '20px')};
+  border-radius: 15px;
+  background-color: #FBE081;
+  box-shadow: 0 1px 5px rgb(198, 197, 197);
+  margin-right: 5px;
+  transition: width 200ms;
+`;
+const PinkCircle = styled.div`
+  height:${(props) => (props.size ? '25px' : '20px')};
+  width: ${(props) => (props.size ? '25px' : '20px')};
+  border-radius: 15px;
+  background-color: #F6E1E1;
+  box-shadow: 0 1px 5px rgb(198, 197, 197);
+  margin-right: 5px;
+  transition: width 200ms;
+`;
+const BlueCircle = styled.div`
+  height:${(props) => (props.size ? '25px' : '20px')};
+  width: ${(props) => (props.size ? '25px' : '20px')};
+  border-radius: 15px;
+  background-color: #D5E5F6;
+  box-shadow: 0 1px 5px rgb(198, 197, 197);
+  margin-right: 5px;
+  transition: width 200ms;
+`;
+
 
 export default AddWord;
