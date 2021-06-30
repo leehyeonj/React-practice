@@ -5,6 +5,7 @@ import { Route, Link, Switch } from "react-router-dom";
 import Dictionary from "./Dictionary";
 import AddWord from "./AddWord";
 import Detail from "./Detail";
+import Spinner from "./Spinner";
 import styled from "styled-components";
 import plusbtn from "./button.png"
 import {connect} from "react-redux";
@@ -16,10 +17,11 @@ import './style.css';
 
 
 // 리덕스에 있는 상태값을 props형태로 app에 넣어줌
-const mapStateToProps = (state)=>{
-  return {words_list : state.words.list};
+const mapStateToProps = (state)=>({
+  words_list : state.words.list,
+  is_loaded: state.words.is_loaded,
 
-}
+});
 
 // 액션 생성을 감시하는 것 액션 반환 .
 const mapDispatchToProps = (dispatch)=>{
@@ -52,34 +54,37 @@ class App extends React.Component {
     
     return (
       <Div className="App">
-        <Container>
-          <Title>My dictionary</Title>
+        {!this.props.is_loaded?(<Spinner/>):(
+          <React.Fragment>
+           <Container>
+           <Title>My dictionary</Title>
+           
+           {/* 처음부터 딕셔너리에 words를 넘겨줘야 dictionary에서 쓸 수 있음 */}
+           <div className="wordsBox">
+               <Switch>
+               <Route
+                 path="/"
+                 exact
+                 render={(props) => 
+                 <Dictionary 
+                 words_list={this.props.words_list} 
+                 history={this.props.history}/>}
+               />
+               <Route  path="/addword" component={AddWord}/>
+               {/* <Link to="/addword">단어추가하기</Link> */}
+               <Route path="/detail/:index" component={Detail}/>
+               </Switch>
+           </div>
+           <PlusBtn>
+             <img className = "plusBtn" src = {plusbtn}
+                 onClick={()=>{
+                   this.props.history.push("/addword");
+                 }}/>
+           </PlusBtn>
           
-          {/* 처음부터 딕셔너리에 words를 넘겨줘야 dictionary에서 쓸 수 있음 */}
-          <div className="wordsBox">
-              <Switch>
-              <Route
-                path="/"
-                exact
-                render={(props) => 
-                <Dictionary 
-                words_list={this.props.words_list} 
-                history={this.props.history}/>}
-              />
-              <Route  path="/addword" component={AddWord}/>
-              {/* <Link to="/addword">단어추가하기</Link> */}
-              <Route path="/detail/:index" component={Detail}/>
-              </Switch>
-          </div>
-          <PlusBtn>
-            <img className = "plusBtn" src = {plusbtn}
-                onClick={()=>{
-                  this.props.history.push("/addword");
-                }}/>
-          </PlusBtn>
-         
-        </Container>
-              
+         </Container>
+         </React.Fragment>   
+        )}
       
       </Div>
     );

@@ -8,14 +8,15 @@ import styled from "styled-components";
 import Detail from "./Detail";
 import NotFound from "./NotFound";
 import Progress from "./Progress";
+import Spinner from "./Spinner";
 import {connect} from "react-redux";
 import { loadBucket, createBucket } from "./redux/modules/bucket";
 
 // 리덕스에 있는 상태값을 props형태로 app에 넣어줌
-const mapStateToProps = (state)=>{
-  return {bucket_list : state.bucket.list};
-
-}
+const mapStateToProps = (state)=>({
+  bucket_list: state.bucket.list,
+  is_loaded : state.bucket.is_loaded,
+});
 
 // 액션 생성을 감시하는 것 액션 반환 .
 const mapDispatchToProps = (dispatch)=>{
@@ -43,6 +44,7 @@ class App extends React.Component {
 
   componentDidMount() {
     console.log(this.props);
+    this.props.load();
   }
 
   addBucketList = () => {
@@ -54,37 +56,45 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Container>
-          <Title>내 버킷리스트</Title>
-          <Progress/>
-          <Line />
-          <Switch>
-          <Route
-            path="/"
-            exact
-            render={(props) => 
-            <BucketList 
-            bucket_list={this.props.bucket_list} 
-            history={this.props.history}/>}
-          />
-          {/* detail 페이지에서 버킷리스트를 보여주기 위해 
-          몇 번째인지 알아야하기 때문에 index값을 가져온다 */}
-          <Route path="/detail:index" component={Detail}/>
-          <Route render={(props) => (
-                <NotFound
-                  history={this.props.history}
-                />
-              )}/>
-          </Switch>
-        </Container>
-      
-        <Input>
-          <input type="text" ref={this.text} />
-          <button onClick={this.addBucketList}>추가하기</button>
-        </Input>
-        <button onClick={()=>{
-          window.scrollTo({top:0,left:0, behavior:"smooth"});
-        }}>위로가기</button>
+        {!this.props.is_loaded? (<Spinner/>):(
+             <React.Fragment>
+            <Container>
+            <Title>내 버킷리스트</Title>
+        
+            
+              <Progress/>
+              <Line />
+              <Switch>
+              <Route
+                path="/"
+                exact
+                render={(props) => 
+                <BucketList 
+                bucket_list={this.props.bucket_list} 
+                history={this.props.history}/>}
+              />
+              {/* detail 페이지에서 버킷리스트를 보여주기 위해 
+              몇 번째인지 알아야하기 때문에 index값을 가져온다 */}
+              <Route path="/detail:index" component={Detail}/>
+              <Route render={(props) => (
+                    <NotFound
+                      history={this.props.history}
+                    />
+                  )}/>
+              </Switch>
+             
+          </Container>
+        
+          <Input>
+            <input type="text" ref={this.text} />
+            <button onClick={this.addBucketList}>추가하기</button>
+          </Input>
+          <button onClick={()=>{
+            window.scrollTo({top:0,left:0, behavior:"smooth"});
+          }}>위로가기</button>
+           </React.Fragment>
+        )}
+
       </div>
     );
   }

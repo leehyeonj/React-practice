@@ -9,6 +9,8 @@ const AddWord = (props) => {
     const input_word = React.useRef(null);
     const input_desc = React.useRef(null);
     const input_ex = React.useRef(null);
+    const input_password = React.useRef(null);
+
 
     return (
         <Container>
@@ -28,6 +30,10 @@ const AddWord = (props) => {
                 <Input_title>예시</Input_title>
                 <Input_desc ref={input_ex} type="text"/>
             </div>
+            <div>
+                <Input_title>비번</Input_title>
+                <Input_word ref={input_password} type="password"/>
+            </div>
           </Body>
          <Btn>
               <Button onClick={() => {
@@ -35,6 +41,7 @@ const AddWord = (props) => {
                     word: input_word.current.value,
                     desc: input_desc.current.value,
                     ex: input_ex.current.value,
+                    password : input_password.current.value,
                   };
                   dispatch(addDic(my_add_word));
                   props.history.goBack();

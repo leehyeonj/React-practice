@@ -5,13 +5,11 @@ const word_db = firestore.collection("myDictionary");
 const GET_WORD = "words/GET_WORD";
 const ADD_WORD = "words/ADD_WORD";
 const DELETE_WORD = "words/DELETE_WORD";
-
+const LOADED = "words/LOADED";
 
 const initialState = {
-    list : [
-        // {word: "ㅎ1ㅎ1", desc: "히히를 변형한 단어", ex:"저 친구가 초콜릿을 줬어."},
-     
-      ],
+    list : [ ],
+    is_loaded: false,
 }
 
 // Action creator
@@ -25,6 +23,10 @@ export const addWord = (words)=>{
 export const deleteWord = (words)=>{
     return {type: DELETE_WORD, words};
 }
+
+export const isLoaded = (loaded) => {
+    return {type: LOADED, loaded}
+  }
 
 // 파이어베이스 미들웨어
 export const loadDic = ()=>{
@@ -44,10 +46,13 @@ export const loadDic = ()=>{
 
 export const addDic = (words) =>{
     return function (dispatch){
-        let words_data = {word:words.word, desc:words.desc, ex:words.ex};
+        let words_data = {word:words.word, desc:words.desc, ex:words.ex, password:words.password};
+
+        dispatch(isLoaded(false));
         word_db.add(words_data).then(docRef =>{
             words_data = {...words_data, id: docRef.id};
             dispatch(addWord(words_data));
+            dispatch(isLoaded(true));
         })
     }
 }
@@ -55,11 +60,13 @@ export const addDic = (words) =>{
 export const deleteDic = (words) =>{
     return function(dispatch, getState){
         const words_data = getState().words.list[words];
+        dispatch(isLoaded(false));
         if(!words_data.id){
             return;
         }
         word_db.doc(words_data.id).delete().then((docRef) =>{
             dispatch(deleteWord(words));
+            dispatch(isLoaded(true));
         }).catch(error=>{
             console.log(error);
         });
@@ -72,7 +79,7 @@ export default function reducer(state = initialState, action = {}){
     switch(action.type){
         case "words/GET_WORD":{
             if(action.words.length>0){
-                return {list: action.words};
+                return {list: action.words, is_loaded:true};
             }  
             return state;
         }
@@ -90,6 +97,10 @@ export default function reducer(state = initialState, action = {}){
             });
             return {list: word_list};
         }
+        case "words/LOADED": {
+
+            return {...state, is_loaded: action.loaded};
+          }
         default: 
             return state;
     }

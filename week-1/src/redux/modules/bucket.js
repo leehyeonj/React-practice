@@ -10,6 +10,7 @@ const initialState = {
     { text: "매일 책읽기", completed: false },
     { text: "수영 배우기", completed: false },
 ],
+    is_read: false, 
 };
 
 // Action 생성함수
@@ -40,8 +41,8 @@ export const updateBucket= (bucket)=>{
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
      case "bucket/LOAD":{
-        //  여기서는 기본값을 로드해오면 됨
-         return state;
+
+      return {state,is_loaded: true};
      }
      case "bucket/CREATE":{
         const new_bucket_list = [...state.list, {text: action.bucket, completed: false }];
