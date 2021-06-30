@@ -98,6 +98,24 @@ const Input = styled.div`
   margin: 20px auto;
   border-radius: 5px;
   border: 1px solid #ddd;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  & *{
+    padding: 5px;
+  }
+  & input {
+    width: 70%;
+    &:focus{
+      border : 1px solid #673ab7;
+    }
+  }
+  & button{
+    width: 25%;
+    color: #fff;
+    border: 1px solid #874ecf;
+    background-color:#874ecf; 
+  }
 `;
 
 const Container = styled.div`
