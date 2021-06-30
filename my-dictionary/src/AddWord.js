@@ -148,6 +148,8 @@ const ColorSet = styled.div`
     height: 30px;
     margin-top: 10px;
     display:flex;
+    justify-contents:center;
+    align-items:center;
 `;
 const YellowCircle = styled.div`
   height:${(props) => (props.size ? '25px' : '20px')};
