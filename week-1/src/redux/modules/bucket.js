@@ -2,10 +2,14 @@
 const LOAD   = 'bucket/LOAD';
 const CREATE = 'bucket/CREATE';
 const DELETE = 'bucket/DELETE';
-
+const UPDATE = 'bucket/UPDATE';
 // 초기값
 const initialState = {
-    list: ["영화관 가기", "매일 책읽기", "수영 배우기"],
+    list: [
+    { text: "영화관 가기", completed: false },
+    { text: "매일 책읽기", completed: false },
+    { text: "수영 배우기", completed: false },
+],
 };
 
 // Action 생성함수
@@ -27,6 +31,10 @@ export const deleteBucket= (bucket)=>{
     return {type: DELETE, bucket}
 }
 
+export const updateBucket= (bucket)=>{
+    return {type: UPDATE, bucket}
+}
+
 // Reducer
 // 이 파일에서는 기본적으로 이 리듀서를 export해준다.
 export default function reducer(state = initialState, action = {}) {
@@ -36,13 +44,24 @@ export default function reducer(state = initialState, action = {}) {
          return state;
      }
      case "bucket/CREATE":{
-        const new_bucket_list = [...state.list, action.bucket];
+        const new_bucket_list = [...state.list, {text: action.bucket, completed: false }];
         return {list: new_bucket_list};
     }
     case "bucket/DELETE":{
         // 원래 인덱스랑 바뀐 인덱스가 같으면 안바꾸고 다르면 바꾼다.
         const bucket_list = state.list.filter((l, idx)=>{
             if(idx != action.bucket){
+                return l;
+            }
+        });
+        return {list: bucket_list};
+    }
+
+    case "bucket/UPDATE":{
+        const bucket_list = state.list.map((l, idx)=>{
+            if(idx === action.bucket){
+                return {...l, completed:true};
+            }else{
                 return l;
             }
         });

@@ -7,7 +7,7 @@ import BucketList from "./BucketList";
 import styled from "styled-components";
 import Detail from "./Detail";
 import NotFound from "./NotFound";
-
+import Progress from "./Progress";
 import {connect} from "react-redux";
 import { loadBucket, createBucket } from "./redux/modules/bucket";
 
@@ -56,6 +56,7 @@ class App extends React.Component {
       <div className="App">
         <Container>
           <Title>내 버킷리스트</Title>
+          <Progress/>
           <Line />
           <Switch>
           <Route
