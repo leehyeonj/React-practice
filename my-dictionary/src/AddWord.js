@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState }  from "react";
 import { useDispatch} from "react-redux";
 import {addDic} from "./redux/modules/words";
 import styled from "styled-components";
@@ -36,9 +36,11 @@ const AddWord = (props) => {
             </div>
       
             <ColorSet>
-              <div className="colorbtn" onClick ={()=>{boxcolor='#FBE081' }} ></div>
-              <div className="colorbtn" onClick ={()=>{boxcolor='#F6E1E1' }} ></div>
-              <div className="colorbtn" onClick ={()=>{boxcolor='#D5E5F6' }} ></div>
+              <div onClick ={()=>{boxcolor='#FBE081'}} ></div>
+
+              <div onClick ={()=>{ boxcolor='#F6E1E1' }} ></div>
+
+              <div onClick ={()=>{ boxcolor='#D5E5F6'}} ></div>
             </ColorSet>
           </Body>
          <Btn>
@@ -121,7 +123,7 @@ const ColorSet = styled.div`
     margin-top: 10px;
     display:flex;
     & : first-child{
-      height: 20px;
+      height:20px;
       width: 20px;
       border-radius: 15px;
       background-color: #FBE081;
@@ -137,7 +139,7 @@ const ColorSet = styled.div`
       margin-right: 5px;
     }
     & : nth-child(3){
-      height: 20px;
+      height:20px;
       width: 20px;
       border-radius: 15px;
       background-color: #D5E5F6;

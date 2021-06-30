@@ -1,10 +1,11 @@
 // 리액트 패키지를 불러옵니다.
-import React from "react";
+import React ,{ Component } from "react";
 import styled from "styled-components";
 // redux hook을 불러옵니다.
 import { useDispatch, useSelector } from "react-redux";
 // 내가 만든 액션 생성 함수를 불러옵니다.
 import {deleteDic} from "./redux/modules/words";
+
 
 const Detail = (props) => {
     const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const Detail = (props) => {
   // url 파라미터에서 인덱스 가져오기
   let words_index = parseInt(props.match.params.index);
 
-  
+
   return (
       
     <div>
@@ -37,12 +38,13 @@ const Detail = (props) => {
                     </div>
                 </Words>
             </WordBox>
+            
             <Btn>
-                <Button onClick={() => {
+                <Button onClick={()=>{  
                     dispatch(deleteDic(words_index));
-                    props.history.goBack();
-                    // window.location.replace("/")
-                }}>삭제하기</Button>
+                    props.history.goBack();}
+                }>삭제하기</Button>
+                
                 <Button onClick={()=>{
                     props.history.goBack();
                 }}>뒤로가기</Button>
@@ -117,4 +119,6 @@ const Button= styled.button`
         background-color: #5858FA;
     }
 `;
+
+
 export default Detail;
