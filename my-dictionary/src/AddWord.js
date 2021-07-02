@@ -10,8 +10,7 @@ const AddWord = (props) => {
     const input_desc = React.useRef(null);
     const input_ex = React.useRef(null);
     const input_password = React.useRef(null);
-    let boxcolor = 'rgb(245, 243, 237)';
-
+    const [boxcolor, setBoxColor] = useState('rgb(245, 243, 237)');
 
     const [yellow, setYellow] = useState(false);
     const [pink, setPink] = useState(false);
@@ -44,7 +43,7 @@ const AddWord = (props) => {
               <YellowCircle 
                size={yellow}
                onClick ={()=>{
-                boxcolor='#FBE081'
+                setBoxColor('#FBE081');
                 setYellow(!yellow);
                 pink && setPink(!pink);
                 blue && setBlue(!blue);
@@ -53,7 +52,7 @@ const AddWord = (props) => {
               <PinkCircle 
               size={pink}
               onClick ={()=>{ 
-                boxcolor='#F6E1E1'
+                setBoxColor('#F6E1E1');
                 setPink(!pink);
                 yellow && setYellow(!yellow);
                 blue && setBlue(!blue);
@@ -62,7 +61,8 @@ const AddWord = (props) => {
               <BlueCircle 
               size={blue}
               onClick ={()=>{ 
-                boxcolor='#D5E5F6'
+                setBoxColor('#D5E5F6')
+                console.log(boxcolor)
                 setBlue(!blue);
                 yellow && setYellow(!yellow);
                 pink && setPink(!pink);
